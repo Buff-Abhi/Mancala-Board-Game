@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+header Mancala Activity Diagram
+start
+:Player 1 Turn;
+while (Moves available?) is (Yes)
+    while (continue playing) is (Yes)
+        :Choose a cup that has marbles;
+        :Place marbles in cups in counter-clockwise direction;
+        if (Is last marble drop in your empty cup?) then (Yes)
+            :Opponent's marbles are taken;
+            break;
+        else (No)
+            if (Is last marble drop in your Mancala?) then (No)
+                break;
+            else (Yes)
+                :Player gets another chance;
+            endif
+        endif
+    endwhile (No)
+    :Switch player;
+endwhile (No)
+:Player with maximum marbles in their Mancala wins;
+stop
+
+@enduml
