@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+(Select a cup) as (P1_Select)
+(Select a cup) as (P2_Select)
+(Marbles moved) as (P1_Move)
+(Marbles moved) as (P2_Move)
+
+Player1 --> (P1_Select)
+(P1_Select) --> (P1_Move)
+(P1_Select) <|-- (Select again)
+Admin --> (P1_Move)
+(P1_Move) --> Player2
+Player2 --> (P2_Select)
+(P2_Select) --> (P2_Move)
+(P2_Select) <|-- (Select again )
+Admin --> (P2_Move)
+(P2_Move) --> Player1
+
+'note right of Admin : This is an example.
+
+'note right of (Use)
+'A note can also
+'be on several lines
+'end note
+'
+'note "This note is connected\nto several objects." as N2
+'(Start) .. N2
+'N2 .. (Use)
+@enduml
