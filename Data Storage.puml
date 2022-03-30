@@ -7,7 +7,7 @@ node "Frontend" {
 }
 
 node "Backend" {
-    [Class - Board] .. [Array - M(rows) x N(columns)\nwhere\nM represents # of players i.e. 2\nN represents # of cups for a player, plus 1 Mancala\nColumn index of array is cup # and last index points to Mancala\nValue of array is marble count in the cup/Mancala] :has
+    [Class - Board] .. [Array - M(rows) x N(columns)\nwhere\nM represents # of players i.e. 2\nN represents # of cups for a player, plus 1 Mancala\nColumn index of array is cup #/Mancala\nValue of array is marble count in cup/Mancala] :has
     [Class - Board] .. [Variable to hold current player name/id] :has
 }
 
