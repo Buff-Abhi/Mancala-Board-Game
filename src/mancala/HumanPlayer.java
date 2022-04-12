@@ -1,6 +1,6 @@
 package mancala;
 
-public class HumanPlayer {
+public class HumanPlayer implements Player{
     private String name;
     private int playerNum;
     private int score;
@@ -13,6 +13,8 @@ public class HumanPlayer {
 
     //ask user for move, play off of it on Board
     public void makeMove(){
+        //ask user for a move between 0 and 5
 
+        //call playCup(chosenNum, playerNum)
     }
 }

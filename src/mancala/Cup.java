@@ -2,9 +2,9 @@ package mancala;
 
 public class Cup {
     private int numStones;
-    private boolean isMancala;
-    private int location;
-    private int opposite;
+    private final boolean isMancala;
+    private final int location;
+    private final int opposite;
 
     private Cup nextCup;
     private Cup prevCup;
@@ -22,17 +22,23 @@ public class Cup {
         opposite = 13-location;
     }
 
-    //getters//
+    //returns numerical location of the cup
     public int getLocation(){
         return location;
     }
 
+    //returns numerical location of the cup opposite of this one
     public int getOppositeLocation(){
         return opposite;
     }
 
+    //returns whether or not the cup is one of the end Mancala cups
     public boolean getIsMancala(){
         return isMancala;
+    }
+
+    public boolean isEmpty() {
+        return (numStones == 0);
     }
 
     //adds specified number to numStones

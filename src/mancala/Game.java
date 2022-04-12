@@ -5,20 +5,30 @@ public class Game {
     private Player[] players;
 
     public Game(boolean isMultiplayer){
-        board = new Board();
+        //get board instance and reset it
+        board = Board.getInstance();
+        board.resetBoard();
         //make factory to create players of correct type depending on whether game is single player or multiplayer
         PlayerFactory factory = new PlayerFactory();
-        Player player1 = factory.returnPlayer(HUMAN);
+        Player player1 = factory.returnPlayer(PlayerType.HUMAN);
+        Player player2;
         if(isMultiplayer){
-            Player player2 = factory.returnPlayer(HUMAN);
+            player2 = factory.returnPlayer(PlayerType.HUMAN);
         }
         else{
-            Player player2 = factory.returnPlayer(COMPUTER);
+            player2 = factory.returnPlayer(PlayerType.COMPUTER);
         }
-        players = [player1, player2];
+        Player[] players = {player1, player2};
     }
 
     public void playGame(){
-
+        boolean gameOver = false;
+        Player currentPlayer;
+        while (!gameOver){
+            for(int i = 0; i < players.length; i++){
+                currentPlayer = players[i];
+                currentPlayer.makeMove();
+            }
+        }
     }
 }
