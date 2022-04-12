@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69964ccf-9074-4d77-a346-19e8e435c329" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mancala/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mancala/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mancala/ComputerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mancala/ComputerPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mancala/Cup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mancala/Cup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mancala/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mancala/Game.java" afterDir="false" />

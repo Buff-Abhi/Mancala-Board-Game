@@ -6,9 +6,6 @@ public class Cup {
     private final int location;
     private final int opposite;
 
-    private Cup nextCup;
-    private Cup prevCup;
-
     //constructor for cup in new game of mancala
     public Cup(int loc, boolean isM){
         if(isM){

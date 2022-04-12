@@ -26,8 +26,14 @@ public class Game {
         Player currentPlayer;
         while (!gameOver){
             for(int i = 0; i < players.length; i++){
+                //set current player and have them make move
                 currentPlayer = players[i];
-                currentPlayer.makeMove();
+                currentPlayer.makeMove(board);
+                //check if the game is over
+                if(board.oneSideEmpty()){
+                    gameOver = true;
+                    break;
+                }
             }
         }
     }
