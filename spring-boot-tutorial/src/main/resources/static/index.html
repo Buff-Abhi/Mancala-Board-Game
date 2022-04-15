@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="App.css">
+    <title>You first Spring application</title>
+    <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<template id="beads">
+    <div class="bead"></div>
+</template>
+<!--<form action="/add" method="POST">-->
+<!--    <p>Let's add a customer.</p>-->
+
+<!--    <div>-->
+<!--        <label for="firstName">First name:</label>-->
+<!--        <input name="first" id="firstName" value="Homer">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="lastName">Last name:</label>-->
+<!--        <input name="last" id="lastName" value="Simpson">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <button>Add customer</button>-->
+<!--    </div>-->
+<!--</form>-->
+
+<!--<form action="/list" method="GET">-->
+<!--    <button>List customers</button>-->
+<!--</form>-->
+
+<div class="board">
+    <div class="section endsection">
+        <div class="pot" id="mb"></div>
+    </div>
+    <div class="section midsection">
+        <div class="midrow topmid">
+            <div class="pot" id="pt1"></div>
+            <div class="pot" id="pt2"></div>
+            <div class="pot" id="pt3"></div>
+            <div class="pot" id="pt4"></div>
+            <div class="pot" id="pt5"></div>
+            <div class="pot" id="pt6"></div>
+        </div>
+        <div class="midrow botmid">
+            <div class="pot" id="pb1"></div>
+            <div class="pot" id="pb2"></div>
+            <div class="pot" id="pb3"></div>
+            <div class="pot" id="pb4"></div>
+            <div class="pot" id="pb5"></div>
+            <div class="pot" id="pb6"></div>
+        </div>
+    </div>
+    <div class="section endsection">
+        <div class="pot" id="mt"></div>
+    </div>
+</div>
+
+<script>
+    beadsTemplate = document.getElementsByTagName("template")[0].content.querySelector("div");
+    for (let i = 0; i < 17; i++) {
+        for (let j = 1; j <= 6; j++) {
+            document.getElementById('pb'+j).appendChild(beadsTemplate.cloneNode());
+            document.getElementById('pt'+j).appendChild(beadsTemplate.cloneNode());
+            document.getElementById('pb'+j).addEventListener("click", clickPot);
+            document.getElementById('pt'+j).addEventListener("click", clickPot);
+        }
+    }
+    var abc = 0;
+    var beadCount = 0;
+    var closestId = "";
+    for (let i = 0; i < document.querySelectorAll('.bead').length; i++) {
+        if(closestId != document.querySelectorAll('.bead')[i].parentNode.id){
+            abc = 0;
+            beadCount = 0;
+            closestId = document.querySelectorAll('.bead')[i].parentNode.id
+        }
+        if (beadCount < 5) {
+            document.querySelectorAll('.bead')[i].style = "transform: rotate(" + abc + "deg) translate(150%)";
+            document.querySelectorAll('.bead')[i].style.background = "white";
+            abc += 72;
+        } else if (beadCount < 15) {
+            document.querySelectorAll('.bead')[i].style = "transform: rotate(" + abc + "deg) translate(300%)";
+            document.querySelectorAll('.bead')[i].style.backgroundColor = "black";
+            abc += 36;
+        } else if(beadCount == 15) {
+            document.querySelectorAll('.bead')[i].style = "transform: rotate(0deg) translate(0%)";
+            document.querySelectorAll('.bead')[i].style.backgroundColor = "yellow";
+        } else {
+            document.querySelectorAll('.bead')[i].style.display = "none"
+        }
+        beadCount++;
+    }
+
+    function clickPot() {
+        debugger;
+        // window.location = '/testMethod';
+        // window.location = '';
+
+
+        beadsCount = $.getJSON('http://localhost:8080/testclick', function(data){
+            return data;
+        });
+
+        var clickedPotId = "";
+        clickedPotId = event.target.id;
+        if(event.target.id==""){
+            clickedPotId = event.target.parentNode.id;
+        }
+        alert(clickedPotId);
+
+        setTimeout(function() {
+            window.location = ''
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
