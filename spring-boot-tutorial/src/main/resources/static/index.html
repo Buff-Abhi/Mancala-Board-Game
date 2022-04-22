@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="App.css">
+    <title>You first Spring application</title>
+<!--    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>-->
+    <script type="text/javascript" src="https://requirejs.org/docs/release/2.3.6/r.js"></script>
+    <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<template id="beads">
+    <div class="bead"></div>
+</template>
+<template id="pots">
+    <div class="pot"></div>
+</template>
+<!--    FirstName: ${model.person.getFirstName}-->
+<!--    LastName: ${model.person.getLastName}-->
+<!--<form action="/add" method="POST">-->
+<!--    <p>Let's add a customer.</p>-->
+
+<!--    <div>-->
+<!--        <label for="firstName">First name:</label>-->
+<!--        <input name="first" id="firstName" value="Homer">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="lastName">Last name:</label>-->
+<!--        <input name="last" id="lastName" value="Simpson">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <button>Add customer</button>-->
+<!--    </div>-->
+<!--</form>-->
+
+<!--<form action="/list" method="GET">-->
+<!--    <button>List customers</button>-->
+<!--</form>-->
+<!--pt1:${model.person.get}-->
+<div class="board">
+    <div class="section endsection">
+        <div class="pot" id="mb"></div>
+    </div>
+    <div class="section midsection">
+        <div class="midrow topmid" id="pot1"></div>
+        <div class="midrow botmid" id="pot2"></div>
+    </div>
+    <div class="section endsection">
+        <div class="pot" id="mt"></div>
+    </div>
+</div>
+
+<script src="App.js"></script>
+
+</body>
+</html>
