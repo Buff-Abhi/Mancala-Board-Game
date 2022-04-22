@@ -1,3 +1,22 @@
+function onPlay() {
+    let errorFlag = false;
+    if (document.querySelector('[id="player1"]').value==""){
+        alert("Enter name of Player 1");
+        errorFlag = true;
+    }
+    else if (document.querySelector('[id="player2"]').value=="") {
+        alert("Enter name of Player 2");
+        errorFlag = true;
+    }
+
+    if (errorFlag==true) return;
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("displayPlayer1").innerHTML=document.querySelector('[id="player1"]').value;
+    document.getElementById("displayPlayer2").innerHTML=document.querySelector('[id="player2"]').value;
+    document.getElementById("outerFrame").style.display = "";
+}
+
 addPots();
 addEventListenerPot();
 initialBeadCount();
@@ -10,10 +29,10 @@ function addPots() {
     for (let i = 1; i <= 6; i++) {
         nodeId = beadsTemplate.cloneNode();
         nodeId.id = "pt" + i;
-        document.getElementById('pot1').appendChild(nodeId);
+        document.getElementById('potsTop').appendChild(nodeId);
         nodeId = beadsTemplate.cloneNode();
         nodeId.id = "pb" + i;
-        document.getElementById('pot2').appendChild(nodeId);
+        document.getElementById('potsBottom').appendChild(nodeId);
     }
 }
 
