@@ -47,14 +47,21 @@ public class DemoController {
     }
 
     @PostMapping("/testmongoadd")
-    public void testmongodb(@RequestParam(required = false) String first) {
+    public void testmongodb(@RequestParam(required = false) String cupId) {
         Board board = Board.getInstance();
-        boardRepository.deleteAll();
-        board.setM1(board.getM1()+2);
+//        boardRepository.deleteAll();
+//        board.setM1(board.getM1()+2);
         boardRepository.save(board);
-        var e = new Error("Could not parse input");
+//        var e = new Error("Could not parse input");
 // e.message is 'Could not parse input'
-        throw e;
+//        throw e;
+    }
+
+    @PostMapping("/gameaction")
+    public void gameAction(@RequestParam(required = false) String cupId) {
+        //Instantiate game class
+        //GR.findby() 0th index
+        //GameRepository.save(game <inst>)
     }
 
 //    @GetMapping("/testclick")

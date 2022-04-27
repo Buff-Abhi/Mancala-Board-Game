@@ -4,15 +4,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 
-@Document(collection = "Current Game")
 public class Board {
-
-    @Id
-    private static int id;
-
     private static Board instance = new Board();
     private ArrayList<Cup> cups;
     private static int size = 14;
+
+    private String cupId;
     //constructor for new board, sets it up ready for a new game of Mancala with each cup that isn't the mancala cups holding 4 stones
     /* Visualize board and indices as:
         12  11  10  9   8   7

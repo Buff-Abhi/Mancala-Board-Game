@@ -1,6 +1,15 @@
 package com.example.springboottutorial;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+
+@Document(collection = "Current Game")
 public class Game {
+    @Id
+    private static int id;
+
+    private String cupId;
+
     private Board board;
     private Player[] players;
     private int gameId;
@@ -35,7 +44,7 @@ public class Game {
                     //set current player and have them make move
                     currentPlayer = players[i];
                     //get move here
-//                    move = ___
+                    move = 1;
                     lastCup = currentPlayer.makeMove(board, move);
                     turnContinues = false;
                     //check if last cup was their mancala cup, if yes then they get to play again
