@@ -17,6 +17,9 @@ public class DemoController {
     private BoardRepository boardRepository;
 
     @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
     private MongoOperations mongoOperations;
 
     @ResponseStatus(value = HttpStatus.FORBIDDEN, reason="To show an example of a custom message")
@@ -51,7 +54,7 @@ public class DemoController {
         Board board = Board.getInstance();
 //        boardRepository.deleteAll();
 //        board.setM1(board.getM1()+2);
-        boardRepository.save(board);
+//        boardRepository.save(board);
 //        var e = new Error("Could not parse input");
 // e.message is 'Could not parse input'
 //        throw e;
@@ -62,6 +65,8 @@ public class DemoController {
         //Instantiate game class
         //GR.findby() 0th index
         //GameRepository.save(game <inst>)
+        Game g = new Game(true, "1", "2");
+        gameRepository.save(g);
     }
 
 //    @GetMapping("/testclick")
@@ -76,9 +81,9 @@ public class DemoController {
 //        return board;
 //    }
 
-    @GetMapping("/list1")
-    public Iterable<Board> getBeads() {
-        return boardRepository.findAll();
-    }
+//    @GetMapping("/list1")
+//    public Iterable<Board> getBeads() {
+//        return boardRepository.findAll();
+//    }
 
 }

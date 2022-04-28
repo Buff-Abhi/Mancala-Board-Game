@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Board {
     private static Board instance = new Board();
     private ArrayList<Cup> cups;
+
     private static int size = 14;
 
     private String cupId;
