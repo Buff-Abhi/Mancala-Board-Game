@@ -1,7 +1,7 @@
 package com.example.springboottutorial;
 
 public class Cup {
-    private Board board = Board.getInstance();
+    private Board board; // = Board.getInstance();
     private int numStones;
     private boolean isMancala;
     private final int location;
@@ -9,8 +9,9 @@ public class Cup {
     private int playerNum;
 
     //constructor for cup in new game of mancala
-    public Cup(int loc, boolean isM){
-        Board board = Board.getInstance();
+    public Cup(int loc, boolean isM, Board board){
+//        Board board = Board.getInstance();
+        this.board = board;
         if(isM){
             numStones = 0;
         }
@@ -36,6 +37,10 @@ public class Cup {
     //returns whether or not the cup is one of the end Mancala cups
     public boolean getIsMancala(){
         return isMancala;
+    }
+
+    public int getNumStones(){
+        return numStones;
     }
 
     public boolean isEmpty() {

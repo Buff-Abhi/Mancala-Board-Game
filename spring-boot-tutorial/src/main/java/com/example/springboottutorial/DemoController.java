@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class DemoController {
@@ -32,9 +31,9 @@ public class DemoController {
     }
 
     @GetMapping("beadcount")
-    public Board getBeadCount() {
-        Query query = Query.query(Criteria.where("gameId").is(1));
-        return mongoOperations.findOne(query, Board.class);
+    public Game getBeadCount() {
+        Query query = Query.query(Criteria.where("gameId").is(0));
+        return mongoOperations.findOne(query, Game.class);
     }
 
     @GetMapping("/testmongo")
@@ -65,7 +64,7 @@ public class DemoController {
         //Instantiate game class
         //GR.findby() 0th index
         //GameRepository.save(game <inst>)
-        Game g = new Game(true, "1", "2");
+        Game g = new Game();
         gameRepository.save(g);
     }
 

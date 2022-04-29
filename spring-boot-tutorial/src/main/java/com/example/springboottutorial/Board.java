@@ -5,8 +5,8 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 
 public class Board {
-    private static Board instance = new Board();
-    private ArrayList<Cup> cups;
+    private static Board instance;
+    private ArrayList<Cup> cups = new ArrayList<Cup>();
 
     private static int size = 14;
 
@@ -18,24 +18,27 @@ public class Board {
         0   1   2   3   4   5
     */
     private Board(){
-        Cup temp;
-        boolean mancalaCup;
-        for (int i = 0; i < size; i++){
-            //if divisible by half of board size it is Mancala
-            if((i+1) % (size/2) == 0){
-                mancalaCup = true;
-            }
-            else{
-                mancalaCup = false;
-            }
-            //make new cup, add to cups
-            temp = new Cup(i, mancalaCup);
-            cups.add(temp);
-        }
+//        Cup temp;
+//        boolean mancalaCup;
+//        for (int i = 0; i < size; i++){
+//            //if divisible by half of board size it is Mancala
+//            if((i+1) % (size/2) == 0){
+//                mancalaCup = true;
+//            }
+//            else{
+//                mancalaCup = false;
+//            }
+//            //make new cup, add to cups
+//            temp = new Cup(i, mancalaCup);
+//            cups.add(temp);
+//        }
     }
 
     //singleton getInstance function
     public static Board getInstance(){
+        if(instance==null) {
+            instance = new Board();
+        }
         return instance;
     }
 
@@ -49,6 +52,20 @@ public class Board {
 
     //reset every cup in the board
     public void resetBoard(){
+        Cup temp;
+        boolean mancalaCup;
+        for (int i = 0; i < size; i++){
+            //if divisible by half of board size it is Mancala
+            if((i+1) % (size/2) == 0){
+                mancalaCup = true;
+            }
+            else{
+                mancalaCup = false;
+            }
+            //make new cup, add to cups
+            temp = new Cup(i, mancalaCup, this);
+            cups.add(temp);
+        }
         for(int i = 0; i < cups.size(); i++){
             cups.get(i).resetCup();
         }

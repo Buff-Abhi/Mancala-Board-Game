@@ -46,29 +46,28 @@ function addEventListenerPot() {
 function initialBeadCount() {
     let beadsTemplate;
     beadsTemplate = document.getElementsByTagName("template")[0].content.querySelector("div");
-    for (let i = 0; i < 16; i++) {
+    let beadCount = getCurrentCount();
+    setTimeout(function() {
+        beadCount = JSON.parse(beadCount.responseText);
         for (let j = 1; j <= 6; j++) {
-            document.getElementById('pb' + j).appendChild(beadsTemplate.cloneNode());
-            document.getElementById('pt' + j).appendChild(beadsTemplate.cloneNode());
+            potId = "pb"+j;
+            for (let i = 0; i < beadCount[potId]; i++) document.getElementById('pb' + j).appendChild(beadsTemplate.cloneNode());
+            potId = "pt"+j;
+            for (let i = 0; i < beadCount[potId]; i++) document.getElementById('pt' + j).appendChild(beadsTemplate.cloneNode());
         }
-    }
-    positionBeads();
+        positionBeads();
+    }, 3000);
 }
 
 function getCurrentCount() {
-    let beadCount;
-    setTimeout(function() {
-        beadCount = $.getJSON('http://localhost:8080/beadcount', function (data) {
-            return data;
-        });
-    }, 3000);
+    let beadCount = $.getJSON('http://localhost:8080/beadcount', function (data) {
+        return data;
+    });
     return beadCount;
 }
 
 function setTitle() {
-    let beadCount = $.getJSON('http://localhost:8080/beadcount', function (data) {
-        return data;
-    });
+    let beadCount = getCurrentCount();
     setTimeout(function() {
         if (beadCount.responseText!="null") {
             for (let i = 0; i < document.querySelectorAll('[id^="pt"]').length; i++) {
