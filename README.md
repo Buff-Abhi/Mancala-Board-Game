@@ -25,3 +25,6 @@ You will have to install MongoDB.
 To run the application, clone the git repository and load maven, npm, and springboot dependencies. Then, navigate to Mancala-Board-Game -> spring-boot-tutorial -> src -> main -> java -> com.example.springboottutorial -> SpringBootTutorialApplication -> Run.
 
 The application will run on localhost:8080 and the MongoDB will fire up on localhost:27017.
+
+Video Link:
+https://o365coloradoedu-my.sharepoint.com/:v:/g/personal/vama5032_colorado_edu/ETQvF6OKTSlJkCmwCl5KrCMB_GJffOmxv0CMw5wIOQr5Fw?e=ZLQNtm
