@@ -75,6 +75,7 @@ public class Game {
             lastCup = currentPlayer.makeMove(board, move);
             turnContinues = false;
             //check if last cup was their mancala cup, if yes then they get to play again
+            //Command Design Pattern
             if(lastCup.getIsMancala() && lastCup.getLocation() == board.getNumCups()/2*currentPlayer.getPlayerNum()-1){
                 turnContinues = true;
             }
