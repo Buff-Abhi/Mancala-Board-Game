@@ -3,6 +3,7 @@ package com.example.springboottutorial;
 import java.util.ArrayList;
 
 public class Board {
+    //Singleton Design pattern as the Board instance is static.
     private static Board instance;
     private ArrayList<Cup> cups = new ArrayList<Cup>();
 
