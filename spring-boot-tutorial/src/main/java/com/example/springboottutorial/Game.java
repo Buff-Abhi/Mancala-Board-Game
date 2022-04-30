@@ -30,7 +30,7 @@ public class Game {
     private Board board;
     @Transient
     private Player[] players;
-
+    //Command design pattern(Board.getInstance())
     public Game(int gameId){
         this.gameId = gameId;
         //get board instance and reset it
@@ -41,7 +41,7 @@ public class Game {
         this.players = new Player[]{p1,p2};
         updateDB();
     }
-
+    
     public void playGame(String cupId){
         boolean gameOver = false;
         Cup lastCup;
