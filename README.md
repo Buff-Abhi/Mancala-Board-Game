@@ -12,6 +12,7 @@ Varun Manjunath, Alexa Rinard, Abhinav Gupta
 
 Report:
 The report can be found as a pdf file in Rebase-(Abhi) branch(ooad-project-final-report.pdf).
+
 Classic Mancala Instructions
 https://endlessgames.com/wp-content/uploads/Mancala_Instructions.pdf
 
