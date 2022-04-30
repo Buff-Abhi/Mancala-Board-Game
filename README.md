@@ -7,7 +7,8 @@ Mancala Board Game
 Please refer to Rebase-(Abhi) branch for Project 7 grading. We plan to continue working on the game to make it better and some of the things are in progress, so we are not merging our code with the 'main' branch.
 <<<-----------IMPORTANT----------->>>
 
-
+Team Member names:
+Varun Manjunath, Alexa Rinard, Abhinav Gupta
 
 Classic Mancala Instructions
 https://endlessgames.com/wp-content/uploads/Mancala_Instructions.pdf
