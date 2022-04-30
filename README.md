@@ -28,3 +28,7 @@ The application will run on localhost:8080 and the MongoDB will fire up on local
 
 Video Link:
 https://o365coloradoedu-my.sharepoint.com/:v:/g/personal/vama5032_colorado_edu/ETQvF6OKTSlJkCmwCl5KrCMB_GJffOmxv0CMw5wIOQr5Fw?e=ZLQNtm
+
+Comments:
+
+MVC Pattern - View(index.html) + Controller(DemoController) + Model(MongoDB JSON)
