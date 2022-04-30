@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,76 +11,40 @@ import java.util.List;
 @RestController
 public class DemoController {
     @Autowired
-    private BoardRepository boardRepository;
-
-    @Autowired
-    private GameRepository gameRepository;
+    public GameRepository gameRepository;
 
     @Autowired
     private MongoOperations mongoOperations;
 
-    @ResponseStatus(value = HttpStatus.FORBIDDEN, reason="To show an example of a custom message")
-    public class ForbiddenException extends RuntimeException {}
-
-    @RequestMapping(value = "/exception", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity sendViaException() {
-        throw new ForbiddenException();
-    }
-
     @GetMapping("beadcount")
     public Game getBeadCount() {
-        Query query = Query.query(Criteria.where("gameId").is(0));
+        List<Game> l = gameRepository.findAll();
+        Game l2 = l.get((l.size()-1));
+        int maxId = l2.getGameId();
+        Query query = Query.query(Criteria.where("gameId").is(maxId));
         return mongoOperations.findOne(query, Game.class);
     }
 
-    @GetMapping("/testmongo")
-    public List<Board> testmongodb() {
-        Board board = Board.getInstance();
-//        boardRepository.deleteAll();
-//        board.setM1(board.getM1()+2);
-//        boardRepository.save(board);
-        var e = new Error("Could not parse input");
-// e.message is 'Could not parse input'
-        throw e;
-//        return boardRepository.findAll();
-    }
-
-    @PostMapping("/testmongoadd")
-    public void testmongodb(@RequestParam(required = false) String cupId) {
-        Board board = Board.getInstance();
-//        boardRepository.deleteAll();
-//        board.setM1(board.getM1()+2);
-//        boardRepository.save(board);
-//        var e = new Error("Could not parse input");
-// e.message is 'Could not parse input'
-//        throw e;
+    @GetMapping("/refreshrepository")
+    public void refreshRepository() {
+        gameRepository.deleteAll();
+        Game g = new Game(1);
+        gameRepository.save(g);
     }
 
     @PostMapping("/gameaction")
     public void gameAction(@RequestParam(required = false) String cupId) {
-        //Instantiate game class
-        //GR.findby() 0th index
-        //GameRepository.save(game <inst>)
-        Game g = new Game();
+        List<Game> l = gameRepository.findAll();
+        int l2;
+        if(l.isEmpty()){
+            l2 = 0;
+        }
+        else {
+            l2 = l.get((l.size()-1)).getGameId();
+        }
+
+        Game g = new Game(l2+1);
+        g.playGame(cupId);
         gameRepository.save(g);
     }
-
-//    @GetMapping("/testclick")
-//    @PostMapping("/testclick")
-//    public Board getTestCust(@RequestParam(required = false) String first, @RequestParam(required = false) String last) {
-//        Board board = new Board();
-//        board.setFirstName(board.getFirstName()+"Abhi");
-//        board.setLastName(board.getLastName()+"Abhi");
-////        Object db = require("mongodb");
-////        db.getSiblingDB("MancalaDB").getCollection("Bead Count").find({}, {"PB1": 1, "_id": 0})
-//        boardRepository.save(board);
-//        return board;
-//    }
-
-//    @GetMapping("/list1")
-//    public Iterable<Board> getBeads() {
-//        return boardRepository.findAll();
-//    }
-
 }

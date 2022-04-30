@@ -1,7 +1,5 @@
 package com.example.springboottutorial;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 
 public class Board {
@@ -10,29 +8,13 @@ public class Board {
 
     private static int size = 14;
 
-    private String cupId;
     //constructor for new board, sets it up ready for a new game of Mancala with each cup that isn't the mancala cups holding 4 stones
     /* Visualize board and indices as:
         12  11  10  9   8   7
     13                         6
         0   1   2   3   4   5
     */
-    private Board(){
-//        Cup temp;
-//        boolean mancalaCup;
-//        for (int i = 0; i < size; i++){
-//            //if divisible by half of board size it is Mancala
-//            if((i+1) % (size/2) == 0){
-//                mancalaCup = true;
-//            }
-//            else{
-//                mancalaCup = false;
-//            }
-//            //make new cup, add to cups
-//            temp = new Cup(i, mancalaCup);
-//            cups.add(temp);
-//        }
-    }
+    private Board(){ }
 
     //singleton getInstance function
     public static Board getInstance(){
@@ -75,19 +57,30 @@ public class Board {
     public Cup playCup(int location, int playerNum){
         //check if valid play
         int numStones;
+        int l = 0;
         Cup finalCup = null;
         boolean isValid = false;
-        if(location > -1 && location < 6){
+        if(playerNum == 1 && location > -1 && location < 6){
+            isValid = true;
+        }
+        if(playerNum == 2 && location > 6 && location < 13){
             isValid = true;
         }
         if(isValid){
-            //update location to be correct for entire board
-            location = (playerNum-1)*7 + location;
             //empty first cup
+//               12 11 10 9 8 7
+//            13                6
+//                0 1 2 3 4 5
             numStones = cups.get(location).emptyCup();
             //loop through adding one stone to each cup after until there aren't any left
             for(int i = 1; i <= numStones; i++){
-                finalCup = cups.get(location+i);
+                if(location+i>13){
+                    finalCup = cups.get(l);
+                    l++;
+                }
+                else{
+                    finalCup = cups.get((location+i));
+                }
                 //if cup is a mancala cup and isn't that player's, then skip over depositing
                 if(finalCup.getIsMancala() && !finalCup.isOnPlayerSide(playerNum)){
                     numStones++;

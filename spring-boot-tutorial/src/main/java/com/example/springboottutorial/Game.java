@@ -8,10 +8,6 @@ import org.springframework.data.annotation.Transient;
 public class Game {
     @Id
     private static int id;
-
-//    private String cupId;
-
-
     private int pb1;
     private int pb2;
     private int pb3;
@@ -29,78 +25,80 @@ public class Game {
     private int m2;
     private String player2;
     private String playedBy;
-
     private int gameId;
-
     @Transient
     private Board board;
-//    private Player[] players;
+    @Transient
+    private Player[] players;
 
-
-    public Game(){
+    public Game(int gameId){
+        this.gameId = gameId;
         //get board instance and reset it
         board = Board.getInstance();
         board.resetBoard();
+        Player p1 = new HumanPlayer("Player1",1);
+        Player p2 = new HumanPlayer("Player2",2);
+        this.players = new Player[]{p1,p2};
         updateDB();
-//        //make factory to create players of correct type depending on whether game is single player or multiplayer
-//        PlayerFactory factory = new PlayerFactory();
-//        Player player1 = factory.returnPlayer(PlayerType.HUMAN, name1, 1);
-//        Player player2 = factory.returnPlayer(PlayerType.HUMAN, name2, 2);
-//        Player[] players = {player1, player2};
     }
 
-//    public void playGame(){
-//        boolean gameOver = false;
-//        Cup lastCup;
-//        int move;
-//        int playerCupMax;
-//        boolean turnContinues;
-//        Player currentPlayer;
-//        while (!gameOver){
-//            for(int i = 0; i < players.length; i++){
-//                turnContinues = true;
-//                while(turnContinues){
-//                    //check if the game is over
-//                    if(board.oneSideEmpty()){
-//                        gameOver = true;
-//                        break;
-//                    }
-//                    //set current player and have them make move
-//                    currentPlayer = players[i];
-//                    //get move here
-//                    move = 1;
-//                    lastCup = currentPlayer.makeMove(board, move);
-//                    turnContinues = false;
-//                    //check if last cup was their mancala cup, if yes then they get to play again
-//                    if(lastCup.getIsMancala() && lastCup.getLocation() == board.getNumCups()/2*currentPlayer.getPlayerNum()-1){
-//                        turnContinues = true;
-//                    }
-//                    //check if last cup was empty, if so, empty both that cup and its opposite into the players mancala
-//                    else if(lastCup.isEmpty() && lastCup.isOnPlayerSide(currentPlayer.getPlayerNum())){
-//                        lastCup.addStones(board.getCup(lastCup.getOppositeLocation()).emptyCup());
-//                    }
-////                    gam.save(this);
-//                }
-//                updateDB();
-//            }
-//        }
-//    }
-//
+    public void playGame(String cupId){
+        boolean gameOver = false;
+        Cup lastCup;
+        int move = -1;
+        int playerCupMax;
+        boolean turnContinues;
+        Player currentPlayer;
+            //set current player and have them make move
+            currentPlayer = players[0];
+            //get move here
+            if(cupId.substring(0,2)=="pt") {
+                switch (cupId.substring(2)) {
+                    case "1": move = 12; break;
+                    case "2": move = 11; break;
+                    case "3": move = 10; break;
+                    case "4": move = 9; break;
+                    case "5": move = 8; break;
+                    case "6": move = 7; break;
+                }
+            }
+            else {
+                switch (cupId.substring(2)) {
+                    case "1": move = 0; break;
+                    case "2": move = 1; break;
+                    case "3": move = 2; break;
+                    case "4": move = 3; break;
+                    case "5": move = 4; break;
+                    case "6": move = 5; break;
+                }
+            }
+            lastCup = currentPlayer.makeMove(board, move);
+            turnContinues = false;
+            //check if last cup was their mancala cup, if yes then they get to play again
+            if(lastCup.getIsMancala() && lastCup.getLocation() == board.getNumCups()/2*currentPlayer.getPlayerNum()-1){
+                turnContinues = true;
+            }
+            //check if last cup was empty, if so, empty both that cup and its opposite into the players mancala
+            else if(lastCup.isEmpty() && lastCup.isOnPlayerSide(currentPlayer.getPlayerNum())){
+                lastCup.addStones(board.getCup(lastCup.getOppositeLocation()).emptyCup());
+            }
+        updateDB();
+    }
+
     public void updateDB(){
-        board = Board.getInstance();
-        pb1 = board.getCup(0).getNumStones();
-        pb2 = board.getCup(1).getNumStones();
-        pb3 = board.getCup(2).getNumStones();
-        pb4 = board.getCup(3).getNumStones();
-        pb5 = board.getCup(4).getNumStones();
-        pb6 = board.getCup(5).getNumStones();
+        pt1 = board.getCup(0).getNumStones();
+        pt2 = board.getCup(1).getNumStones();
+        pt3 = board.getCup(2).getNumStones();
+        pt4 = board.getCup(3).getNumStones();
+        pt5 = board.getCup(4).getNumStones();
+        pt6 = board.getCup(5).getNumStones();
         m1 = board.getCup(6).getNumStones();
-        pt1 = board.getCup(7).getNumStones();
-        pt2 = board.getCup(8).getNumStones();
-        pt3 = board.getCup(9).getNumStones();
-        pt4 = board.getCup(10).getNumStones();
-        pt5 = board.getCup(11).getNumStones();
-        pt6 = board.getCup(12).getNumStones();
+        pb1 = board.getCup(7).getNumStones();
+        pb2 = board.getCup(8).getNumStones();
+        pb3 = board.getCup(9).getNumStones();
+        pb4 = board.getCup(10).getNumStones();
+        pb5 = board.getCup(11).getNumStones();
+        pb6 = board.getCup(12).getNumStones();
         m2 = board.getCup(13).getNumStones();
     }
 

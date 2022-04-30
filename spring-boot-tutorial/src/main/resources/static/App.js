@@ -11,10 +11,12 @@ function onPlay() {
 
     if (errorFlag==true) return;
 
+    $.getJSON('http://localhost:8080/refreshrepository', function (data) { });
     document.getElementById("login").style.display = "none";
     document.getElementById("displayPlayer1").innerHTML=document.querySelector('[id="player1"]').value;
     document.getElementById("displayPlayer2").innerHTML=document.querySelector('[id="player2"]').value;
     document.getElementById("outerFrame").style.display = "";
+    setTimeout(function() { },1000);
 }
 
 addPots();
@@ -55,6 +57,8 @@ function initialBeadCount() {
             potId = "pt"+j;
             for (let i = 0; i < beadCount[potId]; i++) document.getElementById('pt' + j).appendChild(beadsTemplate.cloneNode());
         }
+        for (let i = 0; i < beadCount["m1"]; i++) document.getElementById('mt').appendChild(beadsTemplate.cloneNode());
+        for (let i = 0; i < beadCount["m2"]; i++) document.getElementById('mb').appendChild(beadsTemplate.cloneNode());
         positionBeads();
     }, 3000);
 }
@@ -108,34 +112,7 @@ function positionBeads() {
     }
 }
 
-
 function clickPot() {
-    function handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
-    fetch("http://localhost:8080/exception", {
-        method:"GET",
-    }).then(handleErrors)
-        .then(response => console.log("ok") )
-        .catch(error => console.log(error) );
-
-    // fetch("http://localhost:8080/testmongoadd", {
-    //     method:"POST",
-    //     body: JSON.stringify({
-    //         first: "Deska"
-    //     })
-    // }).then(handleErrors)
-    //     .then(response => console.log("ok") )
-    //     .catch(error => console.log(error) );
-    //
-    // b = $.getJSON('http://localhost:8080/testmongo',function(data) {
-    //     // debugger;
-    //     return data;
-    // });
-
     var clickedPotId = "";
     clickedPotId = event.target.id;
     if (event.target.id == "") {
@@ -143,26 +120,39 @@ function clickPot() {
     }
     alert(clickedPotId);
 
-    let beadCount = $.getJSON('http://localhost:8080/beadcount', function (data) {
-        return data;
-    });
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:8080/gameaction', true);
+
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        }
+    }
+    xhr.send("cupId=pt2");
 
     setTimeout(function() {
-        let beadsTemplate;
-        beadsTemplate = document.getElementsByTagName("template")[0].content.querySelector("div");
-        for (let i = 0; i < document.querySelectorAll('[id^="pt"]').length; i++) {
-            document.querySelectorAll('[id^="pt"]')[i].innerHTML = '';
-            for (let j = 1; j <= JSON.parse(beadCount.responseText)[document.querySelectorAll('[id^="pt"]')[i].id]; j++) {
-                document.querySelectorAll('[id^="pt"]')[i].appendChild(beadsTemplate.cloneNode());
+        let beadCount = getCurrentCount();
+        setTimeout(function() {
+            let beadsTemplate;
+            beadsTemplate = document.getElementsByTagName("template")[0].content.querySelector("div");
+            for (let i = 0; i < document.querySelectorAll('[id^="pt"]').length; i++) {
+                document.querySelectorAll('[id^="pt"]')[i].innerHTML = '';
+                for (let j = 1; j <= JSON.parse(beadCount.responseText)[document.querySelectorAll('[id^="pt"]')[i].id]; j++) {
+                    document.querySelectorAll('[id^="pt"]')[i].appendChild(beadsTemplate.cloneNode());
+                }
             }
-        }
-        for (let i = 0; i < document.querySelectorAll('[id^="pb"]').length; i++) {
-            document.querySelectorAll('[id^="pb"]')[i].innerHTML = '';
-            for (let j = 1; j <= JSON.parse(beadCount.responseText)[document.querySelectorAll('[id^="pb"]')[i].id]; j++) {
-                document.querySelectorAll('[id^="pb"]')[i].appendChild(beadsTemplate.cloneNode());
+            for (let i = 0; i < document.querySelectorAll('[id^="pb"]').length; i++) {
+                document.querySelectorAll('[id^="pb"]')[i].innerHTML = '';
+                for (let j = 1; j <= JSON.parse(beadCount.responseText)[document.querySelectorAll('[id^="pb"]')[i].id]; j++) {
+                    document.querySelectorAll('[id^="pb"]')[i].appendChild(beadsTemplate.cloneNode());
+                }
             }
-        }
-        positionBeads();
-        setTitle();
+            for (let i = 0; i < JSON.parse(beadCount.responseText)["m1"]; i++) document.getElementById('mt').appendChild(beadsTemplate.cloneNode());
+            for (let i = 0; i < JSON.parse(beadCount.responseText)["m2"]; i++) document.getElementById('mb').appendChild(beadsTemplate.cloneNode());
+            positionBeads();
+            setTitle();
+        }, 3000);
     }, 3000);
 }
