@@ -32,4 +32,4 @@ https://o365coloradoedu-my.sharepoint.com/:v:/g/personal/vama5032_colorado_edu/E
 Comments:
 
 MVC Pattern - View(index.html) + Controller(DemoController) + Model(MongoDB JSON)
-Rest of the three design patterns are as comments in the java codes present in the Rebase-(Abhi) repository.
+Rest of the three design patterns are as comments in the java codes present in the Rebase-(Abhi) repository.These three design patterns are Command,Singleton and Simple Factory Design pattern.
