@@ -2,21 +2,10 @@
 Mancala Board Game
 
 
-
-<<<-----------IMPORTANT----------->>>
-Please refer to Rebase-(Abhi) branch for Project 7 grading. We plan to continue working on the game to make it better and some of the things are in progress, so we are not merging our code with the 'main' branch.
-<<<-----------IMPORTANT----------->>>
-
-Team Member names:
-Varun Manjunath, Alexa Rinard, Abhinav Gupta
-
-Report:
-The report can be found as a pdf file in Rebase-(Abhi) branch(ooad-project-final-report.pdf).
-
 Classic Mancala Instructions
 https://endlessgames.com/wp-content/uploads/Mancala_Instructions.pdf
 
-Updated UML Diagram for Project 6: https://lucid.app/lucidchart/ea88e036-8cc9-4052-bc83-e9e68d3040d1/edit?invitationId=inv_4e2bd4c5-7887-47da-ad98-c17160c19356
+Updated UML Diagram: https://lucid.app/lucidchart/ea88e036-8cc9-4052-bc83-e9e68d3040d1/edit?invitationId=inv_4e2bd4c5-7887-47da-ad98-c17160c19356
 
 
 
